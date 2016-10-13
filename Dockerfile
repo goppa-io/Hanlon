@@ -11,10 +11,16 @@ COPY atftpd/atftp.yml /
 COPY atftpd/menu.c32 /
 COPY atftpd/pxelinux.0 /
 COPY atftpd/default /tftpboot/pxelinux.cfg/
+COPY ipxe/ipxe-debug.lkrn /
+COPY ipxe/ipxe-debug.pxe /
+COPY ipxe/ipxe.lkrn /
+COPY ipxe/ipxe.pxe /
+COPY ipxe/undionly-debug.kpxe /
+COPY ipxe/undionly.kpxe /
 
 RUN apt-get -y update \
     && apt-get -y install ansible wget \
-    && /usr/bin/ansible-playbook -c local -i localhost, /build.yml \
+    # && /usr/bin/ansible-playbook -c local -i localhost, /build.yml \ Disable for arm
     && /usr/bin/ansible-playbook -c local -i localhost, /atftp.yml \
     && apt-get -y purge ansible \
     && apt-get -y autoremove \
