@@ -29,7 +29,7 @@ speed quickly.
 
 You can always reach out and ask for help by email or through the web on the [hanlon-project@googlegroups.com][hanlon-project]
   mailing list.  (membership is required to post.)  
-  
+
 If you want to help improve Hanlon directly we have a
 [fairly detailed CONTRIBUTING guide in the repository][contrib] that you can
 use to understand how code gets in to the system, how the project runs, and
@@ -50,13 +50,10 @@ Follow wiki documentation for [Installation Overview](https://github.com/csc/Han
 ## Project Committers
 
 This is the official list of users with "committer" rights to the
-Hanlon project.  [For details on what that means, see the CONTRIBUTING
-guide in the repository][contrib]
+Hanlon project.  For details on what that means, see the [CONTRIBUTING][contrib]
+guide in the repository.
 
-* Russell Teague [GitHub](https://github.com/mtnbikenc) [Twitter](https://twitter.com/mtnbikenc)
-* Joseph Callen [GitHub](https://github.com/jcpowermac) [Twitter](https://twitter.com/jcpowermac)
-
-Please reach out to us if you have any questions about the project.
+Please reach out to <opensource@csc.com> if you have any questions about the project.
 
 ## Hanlon MicroKernel
 
