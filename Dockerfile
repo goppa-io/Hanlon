@@ -46,7 +46,7 @@ RUN apt-get update \
 		mongodb \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /var/lib/mongodb \
-	&& mv /etc/mongod.conf /etc/mongod.conf.orig
+	&& mv /etc/mongodb.conf /etc/mongodb.conf.orig
 
 RUN mkdir -p /data/db /data/configdb \
 	&& chown -R mongodb:mongodb /data/db /data/configdb
