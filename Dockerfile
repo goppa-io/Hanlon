@@ -11,12 +11,12 @@ COPY atftpd/atftp.yml /
 COPY atftpd/menu.c32 /
 COPY atftpd/pxelinux.0 /
 COPY atftpd/default /tftpboot/pxelinux.cfg/
-COPY ipxe/ipxe-debug.lkrn /
-COPY ipxe/ipxe-debug.pxe /
-COPY ipxe/ipxe.lkrn /
-COPY ipxe/ipxe.pxe /
-COPY ipxe/undionly-debug.kpxe /
-COPY ipxe/undionly.kpxe /
+COPY atftpd/ipxe/ipxe-debug.lkrn /
+COPY atftpd/ipxe/ipxe-debug.pxe /
+COPY atftpd/ipxe/ipxe.lkrn /
+COPY atftpd/ipxe/ipxe.pxe /
+COPY atftpd/ipxe/undionly-debug.kpxe /
+COPY atftpd/ipxe/undionly.kpxe /
 
 RUN apt-get -y update \
     && apt-get -y install ansible wget \
