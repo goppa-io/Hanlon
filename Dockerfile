@@ -53,7 +53,7 @@ RUN mkdir -p /data/db /data/configdb \
 VOLUME /data/db /data/configdb
 
 # Enabling the unstable packages to install fuseiso
-RUN echo 'deb http://httpredir.debian.org/debian unstable main non-free contrib' >> /etc/apt/sources.list \
+RUN echo 'deb http://ftp.nz.debian.org/debian unstable main non-free contrib' >> /etc/apt/sources.list \
 	&& echo 'Package: *' >> /etc/apt/preferences.d/pin \
 	&& echo 'Pin: release a=stable' >> /etc/apt/preferences.d/pin \
 	&& echo 'Pin-Priority: 1000' >> /etc/apt/preferences.d/pin \
@@ -89,8 +89,6 @@ RUN echo "install: --no-rdoc --no-ri" > /etc/gemrc
 RUN gem install bundle \
 	&& cd /home/hanlon \
 	&& bundle install --system
-
-#ENV LANG en_US.UTF-8
 
 ENV WIMLIB_IMAGEX_USE_UTF8 true
 ENV HANLON_WEB_PATH /home/hanlon/web
