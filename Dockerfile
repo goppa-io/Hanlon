@@ -37,21 +37,6 @@ RUN apt-get update && \
   mkdir -p /var/log/supervisor && \
   mkdir -p /etc/supervisor/conf.d
 
-
-# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
-
-RUN apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-suggests \
-		mongodb \
-	&& rm -rf /var/lib/apt/lists/* \
-	&& rm -rf /var/lib/mongodb \
-	&& mv /etc/mongodb.conf /etc/mongodb.conf.orig
-
-RUN mkdir -p /data/db /data/configdb \
-	&& chown -R mongodb:mongodb /data/db /data/configdb
-VOLUME /data/db /data/configdb
-
 # Enabling the unstable packages to install fuseiso
 RUN echo 'deb http://ftp.nz.debian.org/debian unstable main non-free contrib' >> /etc/apt/sources.list \
 	&& echo 'Package: *' >> /etc/apt/preferences.d/pin \
@@ -101,15 +86,9 @@ WORKDIR /home/hanlon
 # Hanlon by default runs at TCP 8026
 EXPOSE 8026
 EXPOSE 69/udp
-EXPOSE 27017
-
-# Install Extra Deps
-RUN apt-get update && \
-    apt-get -y install wget
 
 # supervisor base configuration
 ADD supervisor.conf /etc/supervisor.conf
-ADD mongo/mongo.sv.conf /etc/supervisor/conf.d
 ADD atftpd/atftpd.sv.conf /etc/supervisor/conf.d
 ADD hanlon.sv.conf /etc/supervisor/conf.d 
 

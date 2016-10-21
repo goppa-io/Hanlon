@@ -1,7 +1,3 @@
-[submodule "mongo"]
-	path = mongo
-	url = https://gitlab.ii.org.nz/iichip/mongo.git
-	branch = resin
 [submodule "atftpd"]
 	path = atftpd
 	url = https://gitlab.ii.org.nz/iichip/atftpd.git
