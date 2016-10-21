@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-export MONGOHANLONIPADDR="$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)"
+export HANLONIPADDR="$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)"
 
 /bin/bash -c "cat <<EOF>>/etc/hosts
-$MONGOHANLONIPADDR       mongo
-$MONGOHANLONIPADDR       hanlon
+$HANLONIPADDR       hanlon
 EOF"
 
 if [ "$PERSIST_MODE" = "@cassandra" ]
