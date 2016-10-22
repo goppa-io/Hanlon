@@ -1,28 +1,11 @@
 ---
-mongo:
-  image: mongo
-  command: mongod --smallfiles
-  volumes: 
-    - "/opt/hanlon/data/db:/data/db"
-
 server:
-  image: "cscdock/hanlon"
+  image: "iidlx/hanlonjson"
   ports: 
     - 8026:8026
-  links: 
-    - mongo:mongo
+    - 69:69/udp
   privileged: true
-  volumes:
-    - "/opt/hanlon/image:/home/hanlon/image"
-    - "/opt/hanlon/cli/config:/home/hanlon/cli/config"
   env_file: hanlon.env
 #  environment:
 #    DOCKER_HOST: "${DOCKER_HOST}"
 #    HANLON_SUBNETS: "${HANLON_SUBNETS}"
-
-tftpd:
-  image: "cscdock/atftpd"
-  links: 
-    - "server:hanlon"
-  ports:
-    - 69:69/udp
