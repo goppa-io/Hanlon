@@ -37,7 +37,7 @@ module ProjectHanlon
             :api_port         => 8026,
             :admin_port       => 8025,
             :hanlon_log_level => 'Logger::ERROR',
-            :http_timeout     => 60
+            :http_timeout     => 6000
         }
 
       end
