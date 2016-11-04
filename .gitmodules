@@ -1,4 +1,0 @@
-[submodule "atftpd"]
-	path = atftpd
-	url = https://gitlab.ii.org.nz/iichip/atftpd.git
-	branch = resin
