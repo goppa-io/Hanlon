@@ -33,7 +33,6 @@ _yardoc
 doc/
 
 /.rvmrc
-/image
 /node_modules
 /hanlon_daemon.pid
 
