@@ -2,7 +2,7 @@
 #
 # VERSION 3.0.1
 
-FROM ruby:2.2
+FROM iidlx:ruby:2.2
 MAINTAINER Joseph Callen <jcpowermac@gmail.com>
 
 #AFTPD
