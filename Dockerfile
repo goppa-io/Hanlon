@@ -5,6 +5,8 @@
 FROM iidlx/ruby:2.2
 MAINTAINER Joseph Callen <jcpowermac@gmail.com>
 
+#AFTPD
+
 COPY atftpd/run.sh /
 COPY atftpd/build.yml /
 COPY atftpd/atftp.yml /
@@ -30,6 +32,18 @@ RUN apt-get -y update \
     && chown -R nobody:nogroup /tftpboot/ \
     && chmod 755 /run.sh
 
+# DNSMASQ
+
+COPY dnsmasq/dnsmasq.hanlon.conf /home/dhcpd
+COPY dnsmasq/etc/default/* /etc/default/
+COPY dnsmasq/dnsmasq.sh /home/dhcpd
+COPY dnsmasq/dnsmasq.sv.conf /
+
+RUN chmod +x /home/dhcpd/dnsmasq.sh
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get -y install dnsmasq freeipmi ipmitool openipmi lsof sipcalc
+
+#HANLON
 # supervisor installation && 
 # create directory for child images to store configuration in
 RUN apt-get update && \
