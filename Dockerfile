@@ -2,7 +2,7 @@
 #
 # VERSION 3.0.1
 
-FROM iidlx/ruby:2.2
+FROM ruby:2.2
 MAINTAINER Joseph Callen <jcpowermac@gmail.com>
 
 #AFTPD
@@ -34,14 +34,13 @@ RUN apt-get -y update \
 
 # DNSMASQ
 
-COPY dnsmasq/dnsmasq.hanlon.conf /home/dhcpd
-COPY dnsmasq/etc/default/* /etc/default/
-COPY dnsmasq/dnsmasq.sh /home/dhcpd
-COPY dnsmasq/dnsmasq.sv.conf /
+COPY dnsmasq/dnsmasq.hanlon.conf /home/dhcpd/
+COPY dnsmasq/dnsmasq.sh /home/dhcpd/
 
 RUN chmod +x /home/dhcpd/dnsmasq.sh
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get -y install dnsmasq freeipmi ipmitool openipmi lsof sipcalc
+COPY dnsmasq/etc/default/* /etc/default/
 
 #HANLON
 # supervisor installation && 
@@ -103,8 +102,9 @@ EXPOSE 69/udp
 
 # supervisor base configuration
 ADD supervisor.conf /etc/supervisor.conf
-ADD atftpd/atftpd.sv.conf /etc/supervisor/conf.d
-ADD hanlon.sv.conf /etc/supervisor/conf.d 
+ADD atftpd/atftpd.sv.conf /etc/supervisor/conf.d/
+ADD hanlon.sv.conf /etc/supervisor/conf.d/ 
+ADD dnsmasq/dnsmasq.sv.conf /etc/supervisor/conf.d/
 
 # default command
 CMD ["supervisord", "-c", "/etc/supervisor.conf"]
