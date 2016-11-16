@@ -46,7 +46,7 @@ COPY dnsmasq/etc/default/* /etc/default/
 # supervisor installation && 
 # create directory for child images to store configuration in
 RUN apt-get update && \
-  apt-get -y install supervisor && \
+  apt-get -y install supervisor vim && \
   mkdir -p /var/log/supervisor && \
   mkdir -p /etc/supervisor/conf.d
 
