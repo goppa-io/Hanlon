@@ -4,6 +4,7 @@ export HANLONIPADDR="$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cu
 
 /bin/bash -c "cat <<EOF>>/etc/hosts
 $HANLONIPADDR       hanlon
+192.168.1.13        gitlab.ii.org.nz
 EOF"
 
 if [ "$PERSIST_MODE" = "@cassandra" ]
