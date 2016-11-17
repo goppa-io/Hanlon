@@ -34,7 +34,7 @@ module ProjectHanlon
         boot_script << "#!ipxe\n"
         boot_script << "kernel #{image_svc_uri}#{default_mk.kernel}"
         boot_script << " rancher.password=#{mk_password}" if mk_password
-        boot_script << " rancher.cloud_init.datasources=['url:#{image_svc_uri}/cloud-config']"
+        boot_script << " rancher.cloud_init.datasources=[url:#{image_svc_uri}/cloud-config]"
         boot_script << " smbios_uuid=#{node_smbios_uuid}"
         boot_script << " #{hnl_mk_boot_debug_level}" if hnl_mk_boot_debug_level && !hnl_mk_boot_debug_level.empty?
         boot_script << " #{hnl_mk_boot_kernel_args}" if hnl_mk_boot_kernel_args && !hnl_mk_boot_kernel_args.empty?
