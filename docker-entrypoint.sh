@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+git clone -b resin https://gitlab.ii.org.nz/iichip/data.git /home/hanlon
+git clone -b resin https://gitlab.ii.org.nz/iichip/image.git /home/hanlon
+
 export HANLONIPADDR="$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)"
 
 /bin/bash -c "cat <<EOF>>/etc/hosts
