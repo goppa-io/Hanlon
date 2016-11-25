@@ -7,8 +7,10 @@ $HANLONIPADDR       hanlon
 192.168.1.13        gitlab.ii.org.nz
 EOF"
 
-git clone -b coreos https://gitlab.ii.org.nz/iichip/data.git /home/hanlon/data
-git clone -b coreos https://gitlab.ii.org.nz/iichip/image.git /home/hanlon/image
+git clone -b coreos https://gitlab.ii.org.nz/iichip/coreos.git 
+
+mv /home/hanlon/coreos/data .
+mv /home/hanlon/coreos/image .
 
 if [ "$PERSIST_MODE" = "@cassandra" ]
 then
