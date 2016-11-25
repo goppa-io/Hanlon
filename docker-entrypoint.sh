@@ -7,11 +7,6 @@ $HANLONIPADDR       hanlon
 192.168.1.13        gitlab.ii.org.nz
 EOF"
 
-git clone -b coreos https://gitlab.ii.org.nz/iichip/coreos.git 
-
-mv /home/hanlon/coreos/data .
-mv /home/hanlon/coreos/image .
-
 if [ "$PERSIST_MODE" = "@cassandra" ]
 then
   cat <<EOF > ${HANLON_WEB_PATH}/config/cassandra_db.conf
