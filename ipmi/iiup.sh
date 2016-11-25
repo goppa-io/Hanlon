@@ -7,5 +7,6 @@ function ii_up {
         eval local user_args=\"\$IPMI_USER_${name}\"
         eval local pass_args=\"\$IPMI_PASS_${name}\"
         ipmitool -I lanplus -U "${user_args}" -P "${pass_args}" -H "${node_args}" ${command}
+        sleep 10
         done
 }
