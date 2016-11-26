@@ -26,8 +26,6 @@ else
   ./hanlon_init -j '{"hanlon_static_path": "'$HANLON_STATIC_PATH'", "hanlon_subnets": "'$HANLON_SUBNETS'", "hanlon_server": "'$DOCKER_HOST'", "persist_host": "'$MONGO_PORT_27017_TCP_ADDR'", "ipmi_utility": "ipmitool"}'
 fi
 
-source ./ipmi/iiup.sh
-
 cd ${HANLON_WEB_PATH}
 
 PORT=`awk '/api_port/ {print $2}' config/hanlon_server.conf`
