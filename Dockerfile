@@ -63,7 +63,7 @@ RUN echo 'deb http://ftp.nz.debian.org/debian unstable main non-free contrib' >>
 
 # Install the required dependencies
 RUN apt-get update -y \
-	&& apt-get install -y libxml2 gettext libfuse-dev libattr1-dev git build-essential libssl-dev ipmitool libbz2-dev \
+	&& apt-get install -y libxml2 gettext libfuse-dev libattr1-dev git build-essential libssl-dev ipmitool libbz2-dev net-tools \
 	&& mkdir -p /usr/src/wimlib-code \
 	&& mkdir -p /home/hanlon \
 	&& git clone git://wimlib.net/wimlib /usr/src/wimlib-code \
