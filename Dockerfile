@@ -100,11 +100,16 @@ WORKDIR /home/hanlon
 EXPOSE 8026
 EXPOSE 69/udp
 
+# Chef
+RUN gem install chef-zero
+RUN chmod +x /home/hanlon/Chef/entrypoint.sh
+
 # supervisor base configuration
 ADD supervisor.conf /etc/supervisor.conf
 ADD atftpd/atftpd.sv.conf /etc/supervisor/conf.d/
 ADD hanlon.sv.conf /etc/supervisor/conf.d/ 
 ADD dnsmasq/dnsmasq.sv.conf /etc/supervisor/conf.d/
+ADD Chef/chef.sv.conf /etc/supervisor/conf.d/
 
 # default command
 CMD ["supervisord", "-c", "/etc/supervisor.conf"]
