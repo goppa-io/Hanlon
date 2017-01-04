@@ -3,7 +3,7 @@
 # VERSION 3.0.1
 
 FROM iidlx/ruby:2.2
-MAINTAINER Joseph Callen <jcpowermac@gmail.com>
+MAINTAINER Denver Williams <denver@ii.org.nz>
 
 #AFTPD
 
