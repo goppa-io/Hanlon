@@ -8,6 +8,7 @@ services:
 before_script:
   - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
   - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
   - git submodule update --init --recursive
 
 build:
