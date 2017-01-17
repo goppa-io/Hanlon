@@ -6,8 +6,8 @@ services:
   - docker:dind
 
 before_script:
-  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-  - 'echo "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  #- 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  #- 'echo "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   - git submodule update --init --recursive
 
 build:
