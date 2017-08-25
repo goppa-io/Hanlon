@@ -100,20 +100,20 @@ WORKDIR /home/hanlon
 EXPOSE 8026
 EXPOSE 69/udp
 
-# Chef
-RUN gem install chef-zero
-RUN chmod +x /home/hanlon/Chef/entrypoint.sh
-RUN git clone -b resin https://gitlab.ii.org.nz/iichip/chef-provisioning-k8s.git /home/hanlon/Chef/chef-provisioning-k8s
-RUN gem install bundle \
-        && cd /home/hanlon/Chef/chef-provisioning-k8s \
-        && bundle install --system
+# # Chef
+# RUN gem install chef-zero
+# RUN chmod +x /home/hanlon/Chef/entrypoint.sh
+# RUN git clone -b resin https://gitlab.ii.org.nz/iichip/chef-provisioning-k8s.git /home/hanlon/Chef/chef-provisioning-k8s
+# RUN gem install bundle \
+#         && cd /home/hanlon/Chef/chef-provisioning-k8s \
+#         && bundle install --system
 
 # supervisor base configuration
 ADD supervisor.conf /etc/supervisor.conf
 ADD atftpd/atftpd.sv.conf /etc/supervisor/conf.d/
 ADD hanlon.sv.conf /etc/supervisor/conf.d/ 
 ADD dnsmasq/dnsmasq.sv.conf /etc/supervisor/conf.d/
-ADD Chef/chef.sv.conf /etc/supervisor/conf.d/
+# ADD Chef/chef.sv.conf /etc/supervisor/conf.d/
 
 # default command
 CMD ["supervisord", "-c", "/etc/supervisor.conf"]
