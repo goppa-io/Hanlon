@@ -13,8 +13,6 @@ before_script:
   - git submodule update --init --recursive
 
 build:
-  tags:
-    - iimac-shell
   stage: build
   script:
     - docker login -u "gitlab-ci-token" -p "$CI_BUILD_TOKEN" $CI_REGISTRY
