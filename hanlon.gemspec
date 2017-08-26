@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('net-scp', '~> 1.2')
   s.add_runtime_dependency('net-ssh', '~> 3.0')
   s.add_runtime_dependency('pg', '~> 0.18.4')             # No 1.0 release available (Dec 2015)
-  s.add_runtime_dependency('puma', '~> 2.15')
+  s.add_runtime_dependency('puma', '~> 3.7.0')
   s.add_runtime_dependency('rubyipmi', '~> 0.10.0')       # No 1.0 release available (Dec 2015)
   s.add_runtime_dependency('rufus-scheduler', '~> 3.1')
   s.add_runtime_dependency('uuid', '~> 2.3')
