@@ -6,20 +6,25 @@
 FROM ruby:2.2
 MAINTAINER Denver Williams <denver@ii.org.nz>
 
+COPY . /home/hanlon
+WORKDIR /home/hanlon
+RUN git submodule update --init --recursive
+
 #AFTPD
 
-COPY atftpd/run.sh /
-COPY atftpd/build.yml /
-COPY atftpd/atftp.yml /
-COPY atftpd/menu.c32 /
-COPY atftpd/pxelinux.0 /
-COPY atftpd/default /tftpboot/pxelinux.cfg/
-COPY atftpd/ipxe/ipxe-debug.lkrn /
-COPY atftpd/ipxe/ipxe-debug.pxe /
-COPY atftpd/ipxe/ipxe.lkrn /
-COPY atftpd/ipxe/ipxe.pxe /
-COPY atftpd/ipxe/undionly-debug.kpxe /
-COPY atftpd/ipxe/undionly.kpxe /
+RUN ls -la && sleep 100000
+RUN cp atftpd/run.sh /
+RUN cp atftpd/build.yml /
+RUN cp atftpd/atftp.yml /
+RUN cp atftpd/menu.c32 /
+RUN cp atftpd/pxelinux.0 /
+RUN cp atftpd/default /tftpboot/pxelinux.cfg/
+RUN cp atftpd/ipxe/ipxe-debug.lkrn /
+RUN cp atftpd/ipxe/ipxe-debug.pxe /
+RUN cp atftpd/ipxe/ipxe.lkrn /
+RUN cp atftpd/ipxe/ipxe.pxe /
+RUN cp atftpd/ipxe/undionly-debug.kpxe /
+RUN cp atftpd/ipxe/undionly.kpxe /
 
 RUN apt-get -y update \
     && apt-get -y install ansible wget \
@@ -35,13 +40,13 @@ RUN apt-get -y update \
 
 # DNSMASQ
 
-COPY dnsmasq/dnsmasq.hanlon.conf /home/dhcpd/
-COPY dnsmasq/dnsmasq.sh /home/dhcpd/
+RUN cp dnsmasq/dnsmasq.hanlon.conf /home/dhcpd/
+RUN cp dnsmasq/dnsmasq.sh /home/dhcpd/
 
 RUN chmod +x /home/dhcpd/dnsmasq.sh
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get -y install dnsmasq freeipmi ipmitool openipmi lsof sipcalc
-COPY dnsmasq/etc/default/* /etc/default/
+RUN cp dnsmasq/etc/default/* /etc/default/
 
 #HANLON
 # supervisor installation && 
@@ -80,7 +85,6 @@ RUN apt-get update -y \
     	&& apt-get -y clean \
     	&& rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
-COPY . /home/hanlon
 
 # We don't need gem docs
 RUN echo "install: --no-rdoc --no-ri" > /etc/gemrc
@@ -95,7 +99,6 @@ ENV HANLON_WEB_PATH /home/hanlon/web
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
-WORKDIR /home/hanlon
 
 # Hanlon by default runs at TCP 8026
 EXPOSE 8026
@@ -110,10 +113,10 @@ EXPOSE 69/udp
 #         && bundle install --system
 
 # supervisor base configuration
-ADD supervisor.conf /etc/supervisor.conf
-ADD atftpd/atftpd.sv.conf /etc/supervisor/conf.d/
-ADD hanlon.sv.conf /etc/supervisor/conf.d/ 
-ADD dnsmasq/dnsmasq.sv.conf /etc/supervisor/conf.d/
+COPY supervisor.conf /etc/supervisor.conf
+RUN cp atftpd/atftpd.sv.conf /etc/supervisor/conf.d/
+COPY hanlon.sv.conf /etc/supervisor/conf.d/ 
+RUN cp dnsmasq/dnsmasq.sv.conf /etc/supervisor/conf.d/
 # ADD Chef/chef.sv.conf /etc/supervisor/conf.d/
 
 # default command
