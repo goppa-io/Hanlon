@@ -2,7 +2,8 @@
 #
 # VERSION 3.0.1
 
-FROM iidlx/ruby:2.2
+# FROM iidlx/ruby:2.2
+FROM ruby:2.2
 MAINTAINER Denver Williams <denver@ii.org.nz>
 
 #AFTPD
@@ -64,17 +65,17 @@ RUN echo 'deb http://ftp.nz.debian.org/debian unstable main non-free contrib' >>
 # Install the required dependencies
 RUN apt-get update -y \
 	&& apt-get install -y libxml2 gettext libfuse-dev libattr1-dev git build-essential libssl-dev p7zip-full fuseiso ipmitool libbz2-dev net-tools \
-	&& mkdir -p /usr/src/wimlib-code \
+	# && mkdir -p /usr/src/wimlib-code \
 	&& mkdir -p /home/hanlon \
-	&& git clone git://wimlib.net/wimlib /usr/src/wimlib-code \
-	&& cd /usr/src/wimlib-code \
-	&& ./bootstrap \
-	&& ./configure --without-ntfs-3g --prefix=/usr \
-	&& make -j"$(nproc)" \
-	&& make install \
+	# && git clone git://wimlib.net/wimlib /usr/src/wimlib-code \
+	# && cd /usr/src/wimlib-code \
+	# && ./bootstrap \
+	# && ./configure --without-ntfs-3g --prefix=/usr \
+	# && make -j"$(nproc)" \
+	# && make install \
 	&& apt-get purge -y --auto-remove \
 	gettext \
-	&& rm -Rf /usr/src/wimlib-code \
+	# && rm -Rf /usr/src/wimlib-code \
 	&& apt-get -y autoremove \
     	&& apt-get -y clean \
     	&& rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/*
