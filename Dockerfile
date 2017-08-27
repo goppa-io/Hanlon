@@ -48,6 +48,11 @@ RUN chmod +x /home/dhcpd/dnsmasq.sh
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get -y install dnsmasq freeipmi ipmitool openipmi lsof sipcalc
 RUN cp dnsmasq/etc/default/* /etc/default/
 
+# Jessie
+
+RUN mv debian-jessie/image /home/hanlon/ \
+    && mv debian-jessie/data /home/hanlon/ 
+
 #HANLON
 # supervisor installation && 
 # create directory for child images to store configuration in
@@ -69,7 +74,7 @@ RUN echo 'deb http://ftp.nz.debian.org/debian unstable main non-free contrib' >>
 
 # Install the required dependencies
 RUN apt-get update -y \
-	&& apt-get install -y libxml2 gettext libfuse-dev libattr1-dev git build-essential libssl-dev p7zip-full fuseiso ipmitool libbz2-dev net-tools \
+	&& apt-get install -y libxml2 gettext libfuse-dev libattr1-dev git build-essential libssl-dev ipmitool libbz2-dev net-tools \
 	# && mkdir -p /usr/src/wimlib-code \
 	&& mkdir -p /home/hanlon \
 	# && git clone git://wimlib.net/wimlib /usr/src/wimlib-code \
