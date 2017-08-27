@@ -12,13 +12,13 @@ RUN git submodule update --init --recursive
 
 #AFTPD
 
-RUN ls -la && sleep 100000
 RUN cp atftpd/run.sh /
 RUN cp atftpd/build.yml /
 RUN cp atftpd/atftp.yml /
 RUN cp atftpd/menu.c32 /
 RUN cp atftpd/pxelinux.0 /
-RUN cp atftpd/default /tftpboot/pxelinux.cfg/
+RUN mkdir -p /tftpboot/pxelinux.cfg/ \
+    && cp atftpd/default /tftpboot/pxelinux.cfg/
 RUN cp atftpd/ipxe/ipxe-debug.lkrn /
 RUN cp atftpd/ipxe/ipxe-debug.pxe /
 RUN cp atftpd/ipxe/ipxe.lkrn /
@@ -40,8 +40,9 @@ RUN apt-get -y update \
 
 # DNSMASQ
 
-RUN cp dnsmasq/dnsmasq.hanlon.conf /home/dhcpd/
-RUN cp dnsmasq/dnsmasq.sh /home/dhcpd/
+RUN mkdir /home/dhcpd \
+    && cp dnsmasq/dnsmasq.hanlon.conf /home/dhcpd/ \
+    && cp dnsmasq/dnsmasq.sh /home/dhcpd/
 
 RUN chmod +x /home/dhcpd/dnsmasq.sh
 
