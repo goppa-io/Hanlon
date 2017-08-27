@@ -5,7 +5,9 @@
 FROM iidlx/ruby:2.2
 MAINTAINER Denver Williams <denver@ii.org.nz>
 
-COPY . /home/hanlon
+RUN git clone https://gitlab.ii.org.nz/iichip/Hanlon.git -b rpi3 \
+    && mkdir /home/hanlon \
+    && cp -a ./Hanlon/* /home/hanlon/
 WORKDIR /home/hanlon
 RUN git submodule update --init --recursive
 
