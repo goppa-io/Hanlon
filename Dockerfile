@@ -2,8 +2,7 @@
 #
 # VERSION 3.0.1
 
-# FROM iidlx/ruby:2.2
-FROM ruby:2.2
+FROM iidlx/ruby:2.2
 MAINTAINER Denver Williams <denver@ii.org.nz>
 
 COPY . /home/hanlon
