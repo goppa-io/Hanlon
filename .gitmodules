@@ -6,7 +6,3 @@
 	path = atftpd
 	url = https://gitlab.ii.org.nz/iichip/atftpd.git
 	branch = resin
-[submodule "coreos"]
-	path = coreos
-	url = https://gitlab.ii.org.nz/iichip/coreos.git
-	branch = coreos
