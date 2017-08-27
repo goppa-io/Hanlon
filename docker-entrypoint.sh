@@ -29,4 +29,4 @@ fi
 cd ${HANLON_WEB_PATH}
 
 PORT=`awk '/api_port/ {print $2}' config/hanlon_server.conf`
-puma -p ${PORT} $@ 2>&1 | tee /tmp/puma.log
+puma --debug -p ${PORT} $@ 2>&1 | tee /tmp/puma.log
