@@ -6,3 +6,7 @@
 	path = atftpd
 	url = https://gitlab.ii.org.nz/iichip/atftpd.git
 	branch = resin
+[submodule "debian-jessie"]
+	path = debian-jessie
+	url = https://gitlab.ii.org.nz/iichip/debian-jessie.git
+	branch = debian-jessie
