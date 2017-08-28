@@ -121,7 +121,7 @@ EXPOSE 69/udp
 # supervisor base configuration
 COPY supervisor.conf /etc/supervisor.conf
 RUN cp atftpd/atftpd.sv.conf /etc/supervisor/conf.d/
-COPY hanlon.sv.conf /etc/supervisor/conf.d/ 
+# COPY hanlon.sv.conf /etc/supervisor/conf.d/ 
 RUN cp dnsmasq/dnsmasq.sv.conf /etc/supervisor/conf.d/
 # ADD Chef/chef.sv.conf /etc/supervisor/conf.d/
 
