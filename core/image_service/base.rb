@@ -2,7 +2,6 @@ require "fileutils"
 require "digest/sha2"
 require "open3"
 require 'pry'
-require 'pry-byebug'
 
 module ProjectHanlon
   module ImageService
