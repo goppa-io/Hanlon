@@ -95,6 +95,7 @@ RUN apt-get update -y \
 RUN echo "install: --no-rdoc --no-ri" > /etc/gemrc
 
 RUN gem install bundle \
+  && gem install pry-byebug \ 
 	&& cd /home/hanlon \
 	&& bundle install --system
 
