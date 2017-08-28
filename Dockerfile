@@ -50,8 +50,8 @@ RUN cp dnsmasq/etc/default/* /etc/default/
 
 # Jessie
 
-RUN mv debian-jessie/image /home/hanlon/ \
-    && mv debian-jessie/data /home/hanlon/ 
+# RUN mv debian-jessie/image /home/hanlon/ \
+#     && mv debian-jessie/data /home/hanlon/ 
 
 #HANLON
 # supervisor installation && 
