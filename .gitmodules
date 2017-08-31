@@ -9,4 +9,4 @@
 [submodule "debian-jessie"]
 	path = debian-jessie
 	url = https://gitlab.ii.org.nz/iichip/debian-jessie.git
-	branch = debian-jessie
+	branch = debian-jessiev2
