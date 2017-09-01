@@ -10,3 +10,4 @@
 	path = debian-jessie
 	url = https://gitlab.ii.org.nz/iichip/debian-jessie.git
 	branch = debian-jessiev2
+	shallow = true
