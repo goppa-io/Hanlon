@@ -44,6 +44,7 @@ tasksel tasksel/first multiselect standard
 d-i pkgsel/include string openssh-server curl
 d-i grub-installer/only_debian boolean true
 d-i grub-installer/with_other_os boolean true
+d-i grub-installer/bootdev  string /dev/sda
 popularity-contest popularity-contest/participate boolean false
 d-i finish-install/reboot_in_progress note
 #Our callbacks
