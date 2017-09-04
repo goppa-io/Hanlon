@@ -8,7 +8,7 @@ d-i netcfg/get_hostname string <%= hostname %>
 d-i netcfg/get_domain string puppetlabs.lan
 d-i netcfg/no_default_route boolean true
 d-i mirror/country string manual
-d-i mirror/http/mirror string http.us.debian.org
+d-i mirror/http/hostname string http.us.debian.org
 d-i mirror/http/directory string /debian
 d-i mirror/http/proxy string
 d-i time/zone string US/Central
