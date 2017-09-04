@@ -1,0 +1,3 @@
+hostname_prefix: "debian"
+domainname: goppa.local
+root_password: password1234!
