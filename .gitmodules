@@ -6,3 +6,6 @@
 	path = atftpd
 	url = https://gitlab.ii.org.nz/iichip/atftpd.git
 	branch = resin
+[submodule "debian-stretch"]
+	path = debian-stretch
+	url = https://gitlab.ii.org.nz/iichip/debian-stretch.git
