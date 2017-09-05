@@ -62,7 +62,7 @@ RUN apt-get update && \
   mkdir -p /etc/supervisor/conf.d
 
 # Enabling the unstable packages to install fuseiso
-RUN echo 'deb ftp.nz.debian.org/debian unstable main non-free contrib' >> /etc/apt/sources.list \
+RUN echo 'deb http://deb.debian.org/debian unstable main non-free contrib' >> /etc/apt/sources.list \
 	&& echo 'Package: *' >> /etc/apt/preferences.d/pin \
 	&& echo 'Pin: release a=stable' >> /etc/apt/preferences.d/pin \
 	&& echo 'Pin-Priority: 1000' >> /etc/apt/preferences.d/pin \
