@@ -48,10 +48,10 @@ RUN chmod +x /home/dhcpd/dnsmasq.sh
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get -y install dnsmasq freeipmi ipmitool openipmi lsof sipcalc
 RUN cp dnsmasq/etc/default/* /etc/default/
 
-# Jessie
+# Stretch
 
-RUN mv debian-jessie/image /home/hanlon/ \
-    && mv debian-jessie/data /home/hanlon/ 
+RUN mv debian-stretch/image /home/hanlon/ \
+    && mv debian-stretch/data /home/hanlon/ 
 
 #HANLON
 # supervisor installation && 
