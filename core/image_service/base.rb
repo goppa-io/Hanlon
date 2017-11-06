@@ -57,6 +57,7 @@ module ProjectHanlon
           logger.debug "filename: #{@filename}"
           logger.debug "mount path: #{mount_path}"
 
+          binding.pry
           # Make sure file exists
           return cleanup_on_failure(create_mount_success, create_imagepath_success, "File '#{isofullpath}' does not exist") unless File.exist?(isofullpath)
 

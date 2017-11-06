@@ -5,7 +5,6 @@ module ProjectHanlon
 
       attr_accessor :os_name
       attr_accessor :os_version
-
       def initialize(hash)
         super(hash)
         @description = "OS Install"
