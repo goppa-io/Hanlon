@@ -11,19 +11,19 @@ RUN git submodule update --init --recursive
 
 #AFTPD
 
-RUN cp atftpd/run.sh /
-RUN cp atftpd/build.yml /
-RUN cp atftpd/atftp.yml /
-RUN cp atftpd/menu.c32 /
-RUN cp atftpd/pxelinux.0 /
-RUN mkdir -p /tftpboot/pxelinux.cfg/ \
-    && cp atftpd/default /tftpboot/pxelinux.cfg/
-RUN cp atftpd/ipxe/ipxe-debug.lkrn /
-RUN cp atftpd/ipxe/ipxe-debug.pxe /
-RUN cp atftpd/ipxe/ipxe.lkrn /
-RUN cp atftpd/ipxe/ipxe.pxe /
-RUN cp atftpd/ipxe/undionly-debug.kpxe /
-RUN cp atftpd/ipxe/undionly.kpxe /
+COPY atftpd/run.sh /
+COPY atftpd/build.yml /
+COPY atftpd/atftp.yml /
+COPY atftpd/menu.c32 /
+COPY atftpd/pxelinux.0 /
+RUN mkdir -p /tftpboot/pxelinux.cfg/ 
+COPY atftpd/default /tftpboot/pxelinux.cfg/
+COPY atftpd/ipxe/ipxe-debug.lkrn /
+COPY atftpd/ipxe/ipxe-debug.pxe /
+COPY atftpd/ipxe/ipxe.lkrn /
+COPY atftpd/ipxe/ipxe.pxe /
+COPY atftpd/ipxe/undionly-debug.kpxe /
+COPY atftpd/ipxe/undionly.kpxe /
 
 RUN apt-get -y update \
     && apt-get -y install ansible wget \
@@ -39,22 +39,22 @@ RUN apt-get -y update \
 
 # DNSMASQ
 
-RUN mkdir /home/dhcpd \
-    && cp dnsmasq/dnsmasq.hanlon.conf /home/dhcpd/ \
-    && cp dnsmasq/dnsmasq.sh /home/dhcpd/
+RUN mkdir /home/dhcpd 
+COPY dnsmasq/dnsmasq.hanlon.conf /home/dhcpd/ \
+COPY dnsmasq/dnsmasq.sh /home/dhcpd/
 
 RUN chmod +x /home/dhcpd/dnsmasq.sh
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get -y install dnsmasq freeipmi ipmitool openipmi lsof sipcalc
-RUN cp dnsmasq/etc/default/* /etc/default/
+COPY dnsmasq/etc/default/* /etc/default/
 
 # Stretch
 
-RUN mv debian-stretch/image /home/hanlon/ \
-    && mv debian-stretch/data /home/hanlon/
+# RUN mv debian-stretch/image /home/hanlon/ \
+    # && mv debian-stretch/data /home/hanlon/ 
 
 #HANLON
-# supervisor installation &&
+# supervisor installation && 
 # create directory for child images to store configuration in
 RUN apt-get update && \
   apt-get -y install supervisor vim && \
@@ -95,7 +95,7 @@ RUN apt-get update -y \
 RUN echo "install: --no-rdoc --no-ri" > /etc/gemrc
 
 RUN gem install bundle \
-  && gem install pry-byebug \
+  && gem install pry-byebug \ 
 	&& cd /home/hanlon \
 	&& bundle install --system
 
@@ -120,9 +120,9 @@ EXPOSE 69/udp
 
 # supervisor base configuration
 COPY supervisor.conf /etc/supervisor.conf
-RUN cp atftpd/atftpd.sv.conf /etc/supervisor/conf.d/
-COPY hanlon.sv.conf /etc/supervisor/conf.d/
-RUN cp dnsmasq/dnsmasq.sv.conf /etc/supervisor/conf.d/
+COPY atftpd/atftpd.sv.conf /etc/supervisor/conf.d/
+COPY hanlon.sv.conf /etc/supervisor/conf.d/ 
+COPY dnsmasq/dnsmasq.sv.conf /etc/supervisor/conf.d/
 # ADD Chef/chef.sv.conf /etc/supervisor/conf.d/
 
 # default command
