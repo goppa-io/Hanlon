@@ -58,7 +58,6 @@ module ProjectHanlon
           logger.debug "filename: #{@filename}"
           logger.debug "mount path: #{mount_path}"
 
-          binding.pry
           # Make sure file exists
           return cleanup_on_failure(create_mount_success, create_imagepath_success, "File '#{isofullpath}' does not exist") unless File.exist?(isofullpath)
 
@@ -138,7 +137,6 @@ module ProjectHanlon
       def verify(lcl_image_path)
         set_lcl_image_path(lcl_image_path) unless @_lcl_image_path != nil
         unless get_dir_hash(image_path) == @verification_hash
-          binding.pry
           logger.error "ISO file structure is invalid"
           return [false, "ISO file structure is invalid"]
         end
