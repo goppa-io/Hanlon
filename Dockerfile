@@ -6,8 +6,8 @@ FROM iidlx/ruby:2.2
 MAINTAINER Denver Williams <denver@ii.org.nz>
 
 WORKDIR /home/hanlon
-# RUN git clone https://gitlab.ii.org.nz/iichip/Hanlon.git -b rpi3 /home/hanlon
-# RUN git submodule update --init --recursive
+RUN git clone https://gitlab.ii.org.nz/iichip/Hanlon.git -b rpi3 /home/hanlon
+RUN git submodule update --init --recursive
 
 #AFTPD
 
