@@ -15,6 +15,7 @@ module ProjectHanlon
       ARCHIVE_COMMAND = 'fuseiso'
       ARCHIVE_UMOUNT_COMMAND = 'fusermount'
       UNZIP_COMMAND = '7z'
+      TAR_COMMAND = 'tar'
 
       attr_accessor :filename
       attr_accessor :description
@@ -61,14 +62,15 @@ module ProjectHanlon
           # Make sure file exists
           return cleanup_on_failure(create_mount_success, create_imagepath_success, "File '#{isofullpath}' does not exist") unless File.exist?(isofullpath)
 
-          # Make sure it has an .iso extension
-          return cleanup_on_failure(create_mount_success, create_imagepath_success, "File '#{isofullpath}' is not an ISO") if @filename[-4..-1].downcase != ".iso"
+          # Make sure it has an .iso extension,
+          # We are using .tar for Linuxkit built systems, disable for now.
+          # return cleanup_on_failure(create_mount_success, create_imagepath_success, "File '#{isofullpath}' is not an ISO") if @filename[-4..-1].downcase != ".iso"
 
           # Confirm a mount doesn't already exist
           # TODO is_mounted method does not work with fuseiso
           unless is_mounted?(isofullpath)
             supported_methods = extra[:supported_methods]
-            supported_methods = [ARCHIVE_COMMAND, MOUNT_COMMAND] unless supported_methods
+            supported_methods = [TAR_COMMAND] unless supported_methods
             unless mount(isofullpath, supported_methods)
               logger.error "Could not mount '#{isofullpath}' on '#{mount_path}'"
               return cleanup_on_failure(create_mount_success, create_imagepath_success, "Could not mount '#{isofullpath}' on '#{mount_path}'")
@@ -93,6 +95,8 @@ module ProjectHanlon
           # otherwise we'll copy the contents from the 'mount_path' to the 'image_path'
           if @mount_method == :zip
             `#{UNZIP_COMMAND} x -y -o'#{image_path}' #{isofullpath}`
+          elsif @mount_method == :tar
+            `tar xvf '#{isofullpath}' -C '#{image_path}'`
           else
             # Attempt to copy from mount path to image path
             # No way to test if successful. FileUtils.cp_r returns nil.
@@ -101,7 +105,7 @@ module ProjectHanlon
 
           # if asked for verification and the ISO wasn't unpacked using the UNZIP_COMMAND,
           # then compare the source and copy directory hashes
-          if extra[:verify_copy] && @mount_method != :zip
+          if extra[:verify_copy] && @mount_method != :zip && @mount_method != :tar
             # Verify diff between mount / image paths
             # For speed/flexibility reasons we just verify all files exists and not their contents
             @verification_hash = get_dir_hash(image_path)
@@ -167,6 +171,8 @@ module ProjectHanlon
           @mount_method = :fuseiso
         elsif supported_methods.include?(UNZIP_COMMAND) && exec_in_path(UNZIP_COMMAND)
           @mount_method = :zip
+        elsif supported_methods.include?(TAR_COMMAND) && exec_in_path(TAR_COMMAND)
+          @mount_method = :tar
         elsif supported_methods.include?(MOUNT_COMMAND) && exec_in_path(MOUNT_COMMAND)
           logger.debug "Mounting #{isoimage} using command '#{USER_MOUNT_COMMAND} -o loop #{isoimage} #{mount_path}'"
           stdout, stderr, status = Open3.capture3("#{USER_MOUNT_COMMAND} -o loop #{isoimage} #{mount_path}")
