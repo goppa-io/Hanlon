@@ -130,11 +130,11 @@ module ProjectHanlon
       end
 
       def kernel_path
-        "kernel"
+        "boot/kernel"
       end
 
       def initrd_path
-        "initrd.img"
+        "boot/vmlinuz"
       end
 
       # TODO: make optional
