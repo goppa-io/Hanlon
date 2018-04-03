@@ -297,9 +297,7 @@ module Hanlon
             @_lcl_image_path = ProjectHanlon.config.image_path + "/"
 
             image.set_lcl_image_path(ProjectHanlon.config.image_path)
-            #Hardcode Output for Testing
-            image.image_status, image.image_status_message = [true, "ISO file structure is valid"]
-                                                             #image.verify(image.image_path)
+            image.image_status, image.image_status_message = image.verify(image.image_path)
 
             # if it's a Windows image, add images for each of the sub-images contained within
             # the top-level (base) Windows image we just added
