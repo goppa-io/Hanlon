@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# See CoreOS cloud config for supported options:
+# https://coreos.com/docs/cluster-management/setup/cloudinit-cloud-config/
+cat > /tmp/cloud-config.yaml << EOF
+#cloud-config
+<%= cloud_config_yaml %>
+hostname: <%= hostname %>
+EOF
+
+sudo coreos-install -d <%= install_disk %> -c /tmp/cloud-config.yaml
+[ "$?" -eq 0 ] && curl <%= callback_url("postinstall", "complete") %> || curl <%= callback_url("postinstall", "install_fail") %>
+
+sudo reboot
+
