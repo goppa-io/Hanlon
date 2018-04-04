@@ -1,7 +1,7 @@
 module ProjectHanlon
   module ModelTemplate
 
-    class RancherosInMemory < InMemory
+    class LinuxkitInMemory < InMemory
       include(ProjectHanlon::Logging)
 
       # setup an accessor for the ssh_key instance var
@@ -87,7 +87,7 @@ module ProjectHanlon
         ret
       end
 
-      # will perform an "install" of RancherOS by booting
+      # will perform an "install" of Linuxkit by booting
       # into an in-memory image
       def start_install(node, policy_uuid)
         filepath = template_filepath('boot_install')
