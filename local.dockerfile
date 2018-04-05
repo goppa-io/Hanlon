@@ -2,12 +2,11 @@
 #
 # VERSION 3.0.1
 
-FROM iidlx/ruby:2.2
+FROM ruby:2.2
 MAINTAINER Denver Williams <denver@ii.org.nz>
 
 WORKDIR /home/hanlon
-RUN git clone https://gitlab.ii.org.nz/iichip/Hanlon.git -b rpi3 /home/hanlon
-RUN git submodule update --init --recursive
+COPY . /home/hanlon
 
 #AFTPD
 
@@ -47,11 +46,6 @@ RUN chmod +x /home/dhcpd/dnsmasq.sh
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get -y install dnsmasq freeipmi ipmitool openipmi lsof sipcalc
 COPY dnsmasq/etc/default/* /etc/default/
-
-# Stretch
-
-# RUN mv debian-stretch/image /home/hanlon/ \
-    # && mv debian-stretch/data /home/hanlon/ 
 
 #HANLON
 # supervisor installation && 
@@ -109,14 +103,6 @@ RUN chmod +x /docker-entrypoint.sh
 # Hanlon by default runs at TCP 8026
 EXPOSE 8026
 EXPOSE 69/udp
-
-# # Chef
-# RUN gem install chef-zero
-# RUN chmod +x /home/hanlon/Chef/entrypoint.sh
-# RUN git clone -b resin https://gitlab.ii.org.nz/iichip/chef-provisioning-k8s.git /home/hanlon/Chef/chef-provisioning-k8s
-# RUN gem install bundle \
-#         && cd /home/hanlon/Chef/chef-provisioning-k8s \
-#         && bundle install --system
 
 # supervisor base configuration
 COPY supervisor.conf /etc/supervisor.conf
