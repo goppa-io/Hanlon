@@ -60,3 +60,6 @@ require 'model/coreos_in_memory'
 
 # level 3 - rancheros
 require 'model/rancheros_in_memory'
+
+# level 3 - linuxkit
+require 'model/linuxkit_in_memory'
