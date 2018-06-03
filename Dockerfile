@@ -2,7 +2,7 @@
 #
 # VERSION 3.0.1
 
-FROM ruby:2.3-jessie
+FROM ruby:2.3-stretch
 MAINTAINER Denver Williams <denver@ii.org.nz>
 
 WORKDIR /home/hanlon
