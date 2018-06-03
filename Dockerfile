@@ -2,7 +2,7 @@
 #
 # VERSION 3.0.1
 
-FROM iidlx/ruby:2.2
+FROM ruby:2.3-slim-jessie
 MAINTAINER Denver Williams <denver@ii.org.nz>
 
 WORKDIR /home/hanlon
@@ -45,7 +45,7 @@ RUN mkdir /home/dhcpd \
 
 RUN chmod +x /home/dhcpd/dnsmasq.sh
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get -y install dnsmasq freeipmi ipmitool openipmi lsof sipcalc
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get -y install dnsmasq freeipmi ipmitool openipmi lsof sipcalc htop ruby-bson-ext tmate
 RUN cp dnsmasq/etc/default/* /etc/default/
 
 # Stretch
