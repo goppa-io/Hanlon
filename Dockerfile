@@ -6,7 +6,7 @@ FROM ruby:2.3-slim-jessie
 MAINTAINER Denver Williams <denver@ii.org.nz>
 
 WORKDIR /home/hanlon
-RUN git clone https://gitlab.ii.org.nz/iichip/Hanlon.git -b linuxkit /home/hanlon
+RUN git clone https://github.com/denverwilliams/Hanlon.git -b linuxkit /home/hanlon
 RUN git submodule update --init --recursive
 
 #AFTPD
