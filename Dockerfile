@@ -2,7 +2,7 @@
 #
 # VERSION 3.0.1
 
-FROM ruby:2.3-stretch
+FROM ruby:2.3-jessie
 MAINTAINER Denver Williams <denver@ii.org.nz>
 
 WORKDIR /home/hanlon
@@ -45,7 +45,7 @@ RUN mkdir /home/dhcpd \
 
 RUN chmod +x /home/dhcpd/dnsmasq.sh
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get -y install dnsmasq freeipmi ipmitool openipmi lsof sipcalc htop ruby-bson-ext tmate
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get -y install dnsmasq freeipmi ipmitool openipmi lsof sipcalc htop ruby-bson-ext
 RUN cp dnsmasq/etc/default/* /etc/default/
 
 # Stretch
@@ -125,7 +125,8 @@ COPY hanlon.sv.conf /etc/supervisor/conf.d/
 RUN cp dnsmasq/dnsmasq.sv.conf /etc/supervisor/conf.d/
 # ADD Chef/chef.sv.conf /etc/supervisor/conf.d/
 
-# configure tmate
+# install & configure tmate
+RUN apt update && apt -y install tmate
 COPY tmate_configuration.conf ~/.tmate.conf
 COPY tmate_supervisor.conf /etc/supervisor/conf.d
 
