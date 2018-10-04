@@ -6,7 +6,7 @@ FROM ruby:2.3-stretch
 MAINTAINER Denver Williams <denver@ii.org.nz>
 
 WORKDIR /home/hanlon
-RUN git clone https://github.com/denverwilliams/Hanlon.git -b linuxkit /home/hanlon
+RUN git clone https://github.com/goppa-io/Hanlon.git -b linuxkit /home/hanlon
 RUN git submodule update --init --recursive
 
 #AFTPD
@@ -124,6 +124,10 @@ RUN cp atftpd/atftpd.sv.conf /etc/supervisor/conf.d/
 COPY hanlon.sv.conf /etc/supervisor/conf.d/
 RUN cp dnsmasq/dnsmasq.sv.conf /etc/supervisor/conf.d/
 # ADD Chef/chef.sv.conf /etc/supervisor/conf.d/
+
+# configure tmate
+COPY tmate_configuration.conf ~/.tmate.conf
+COPY tmate_supervisor.conf /etc/supervisor/conf.d
 
 # default command
 CMD ["supervisord", "-c", "/etc/supervisor.conf"]
