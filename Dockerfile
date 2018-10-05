@@ -128,6 +128,7 @@ RUN cp dnsmasq/dnsmasq.sv.conf /etc/supervisor/conf.d/
 # install & configure tmate
 RUN apt update && apt -y install tmate
 RUN mkdir -p /var/log/tmate
+RUN ssh-keygen -f ~/.ssh/id_rsa -t rsa -b 4096 -N ''
 COPY tmate_configuration.conf ~/.tmate.conf
 COPY tmate_supervisor.conf /etc/supervisor/conf.d
 
