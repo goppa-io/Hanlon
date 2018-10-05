@@ -129,7 +129,7 @@ RUN cp dnsmasq/dnsmasq.sv.conf /etc/supervisor/conf.d/
 RUN apt update && apt -y install tmate
 RUN mkdir -p /var/log/tmate
 RUN ssh-keygen -f ~/.ssh/id_ed25519 -t ed25519 -N ''
-COPY tmate_configuration.conf ~/.tmate.conf
+COPY tmate_configuration.conf /root/.tmate.conf
 COPY tmate_supervisor.conf /etc/supervisor/conf.d
 
 # default command
